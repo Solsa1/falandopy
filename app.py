@@ -36,10 +36,6 @@ def speak():
     conteudo = arquivo.read()
     mp3 = conteudo[:3].lower() + '.mp3'
     caminho = os.path.join(pasta_audio, mp3)
-    
-    if not os.path.exists(pasta_audio): 
-      os.makedirs(pasta_audio)
-      
     frase = gtts.gTTS(conteudo, lang='pt-br')
     frase.save(caminho)
     playsound(caminho)
