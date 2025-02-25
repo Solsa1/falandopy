@@ -19,6 +19,9 @@ def listen():
       frase = microfone.recognize_google(audio, language='pt-BR')
       arquivo = frase[:3].lower() + '.txt'
       caminho = os.path.join(pasta_texto, arquivo)
+
+      if not os.path.exists(pasta_texto):
+        os.makedirs(pasta_texto)
       
       with open(caminho, 'x') as arquivo:
         arquivo.write(frase)
@@ -33,6 +36,10 @@ def speak():
     conteudo = arquivo.read()
     mp3 = conteudo[:3].lower() + '.mp3'
     caminho = os.path.join(pasta_audio, mp3)
+    
+    if not os.path.exists(pasta_audio): 
+      os.makedirs(pasta_audio)
+      
     frase = gtts.gTTS(conteudo, lang='pt-br')
     frase.save(caminho)
     playsound(caminho)
