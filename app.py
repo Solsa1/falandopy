@@ -31,6 +31,7 @@ def listen():
     except sr.UnknownValueError:
       print('não consegui capturar o audio')
 
+
 def speak(conteudo):
   nome_arquivo = conteudo.split()
 
@@ -54,10 +55,28 @@ def speak(conteudo):
 
 while True:
   frase = listen()
-  continuar = input('O que você digitou está correto? S/N').upper()[0] 
+  continuar_listen = input('O que você falou está correto? S/N ').upper()[0]
   
-  if continuar == 'S':
-    speak(frase)
+  if continuar_listen == 'S':
+    validacao_listen.append(1)
   
-  elif continuar =='N':
+  elif continuar_listen =='N':
+    validacao_listen.append(0)
+  
+  fala = input('Digite algo para que o python fale')
+  speak(fala)
+  continuar_speak = input('O que foi falado foi o que você digitou? S/N ').upper()[0]
+
+  if continuar_speak == 'S':
+    validacao_speak.append(1)
+  
+  elif continuar_speak == 'N':
+    validacao_speak.append(0)
+  
+  parar_teste = input('Deseja parar o teste? S/N ').upper()[0]
+  
+  if parar_teste == 'S':
     break
+  
+  elif parar_teste == 'N':
+    continue
