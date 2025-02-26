@@ -26,7 +26,6 @@ def listen():
     
       print('Você falou isso: ' + frase_falada)
       
-      return frase_falada
     
     except sr.UnknownValueError:
       print('não consegui capturar o audio')
