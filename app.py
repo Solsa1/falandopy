@@ -36,11 +36,13 @@ def speak(conteudo):
 
   for nome in nome_arquivo: 
     mp3 = nome.lower() + '.mp3'
+    mp3_utf = mp3.encode('utf-8')
+    mp3_ascii = mp3_utf.decode('ascii', 'ignore')
     
     if not os.path.exists(pasta_audio): 
       os.makedirs(pasta_audio)
   
-    caminho = os.path.join(pasta_audio, mp3)
+    caminho = os.path.join(pasta_audio, mp3_ascii)
     
     if not os.path.exists(caminho):
       frase = gtts.gTTS(conteudo, lang='pt-br')
@@ -53,14 +55,14 @@ def speak(conteudo):
   
 
 while True:
-  frase = listen()
-  continuar_listen = input('O que você falou está correto? S/N ').upper()[0]
+  #frase = listen()
+  #continuar_listen = input('O que você falou está correto? S/N ').upper()[0]
   
-  if continuar_listen == 'S':
-    validacao_listen.append(1)
+  #if continuar_listen == 'S':
+  #  validacao_listen.append(1)
   
-  elif continuar_listen =='N':
-    validacao_listen.append(0)
+  #elif continuar_listen =='N':
+   # validacao_listen.append(0)
   
   fala = input('Digite algo para que o python fale')
   speak(fala)
