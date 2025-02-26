@@ -55,14 +55,14 @@ def speak(conteudo):
   
 
 while True:
-  #frase = listen()
-  #continuar_listen = input('O que você falou está correto? S/N ').upper()[0]
+  frase = listen()
+  continuar_listen = input('O que você falou está correto? S/N ').upper()[0]
   
-  #if continuar_listen == 'S':
-  #  validacao_listen.append(1)
+  if continuar_listen == 'S':
+    validacao_listen.append(1)
   
-  #elif continuar_listen =='N':
-   # validacao_listen.append(0)
+  elif continuar_listen =='N':
+    validacao_listen.append(0)
   
   fala = input('Digite algo para que o python fale')
   speak(fala)
