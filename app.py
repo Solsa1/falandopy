@@ -3,8 +3,9 @@ import os
 import gtts
 from playsound import playsound
 
-
-arquivos = []
+validacao_listen = []
+validacao_speak = []
+log_frases = []
 pasta_audio = 'audioe'
 
 def listen():
@@ -19,9 +20,9 @@ def listen():
 
     try:
       frase = microfone.recognize_google(audio, language='pt-BR')
-      arquivos.append(frase)
+      log_frases.append(frase)
       
-      frase_falada = arquivos[-1] 
+      frase_falada = log_frases[-1] 
     
       print('Você falou isso: ' + frase_falada)
       
@@ -30,18 +31,33 @@ def listen():
     except sr.UnknownValueError:
       print('não consegui capturar o audio')
 
-def speak():
-  caminho = listen()
-  with open(caminho, 'r') as arquivo:
-    conteudo = arquivo.read()
-    mp3 = conteudo[:3].lower() + '.mp3'
-    caminho = os.path.join(pasta_audio, mp3)
+def speak(conteudo):
+  nome_arquivo = conteudo.split()
+
+  for nome in nome_arquivo: 
+    mp3 = nome.lower() + '.mp3'
+    
     if not os.path.exists(pasta_audio): 
       os.makedirs(pasta_audio)
-    frase = gtts.gTTS(conteudo, lang='pt-br')
-    frase.save(caminho)
-    playsound(caminho)
+  
+    caminho = os.path.join(pasta_audio, mp3)
+    
+    if not os.path.exists(caminho):
+      frase = gtts.gTTS(conteudo, lang='pt-br')
+      frase.save(caminho)
+      playsound(caminho)
+      break
+    
+    elif os.path.exists(caminho):
+      continue
+  
 
-
-
-speak()
+while True:
+  frase = listen()
+  continuar = input('O que você digitou está correto? S/N').upper()[0] 
+  
+  if continuar == 'S':
+    speak(frase)
+  
+  elif continuar =='N':
+    break
