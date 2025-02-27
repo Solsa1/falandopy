@@ -2,3 +2,4 @@ SpeechRecognition
 pyaudio
 playsound==1.2.2
 gTTS
+pyttsx3
